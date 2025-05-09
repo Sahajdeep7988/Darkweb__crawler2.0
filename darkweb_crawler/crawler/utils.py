@@ -8,5 +8,5 @@ def setup_logging():
         handlers=[
             logging.FileHandler('outputs/logs/crawler.log'),
             logging.StreamHandler()
-        ]
+        ] 
     )

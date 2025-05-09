@@ -16,4 +16,4 @@ class TorManager:
             return True
         except Exception as e:
             print(f"⚠️ Circuit rotation failed: {e}")
-            return False
+            return False 
