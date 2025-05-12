@@ -1,0 +1,158 @@
+2025-05-12 13:11:11,964 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:11:12,642 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:13,079 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:11:13,770 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:11:15,800 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:11:17,405 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:18,072 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:18,734 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:11:32,766 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:11:33,352 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:34,003 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:11:34,730 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:11:36,646 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:11:37,601 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:38,274 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:38,952 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:11:52,821 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:11:53,372 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:53,744 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:11:54,108 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:11:55,959 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:11:57,484 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:58,178 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:11:58,841 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:12:09,898 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:12:10,441 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:10,809 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:12:11,189 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:12:13,120 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:12:14,003 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:14,678 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:15,345 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:12:26,018 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:12:26,600 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:27,006 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:12:27,378 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:12:29,281 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:12:30,517 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:31,211 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:31,840 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:12:43,657 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:12:44,215 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:44,571 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:12:44,943 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:12:46,722 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:12:48,361 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:49,042 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:12:49,717 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:13:02,000 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:13:02,572 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:02,933 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:13:03,299 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:13:05,121 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:13:06,954 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:07,658 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:08,370 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:13:21,443 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:13:22,028 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:22,438 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:13:22,810 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:13:24,619 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:13:26,517 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:27,282 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:28,009 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:13:39,946 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:13:40,520 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:40,888 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:13:41,269 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:13:43,368 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:13:44,948 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:45,641 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:13:46,339 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:14:00,071 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:14:00,639 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:14:01,002 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:14:01,382 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:14:03,220 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:14:05,913 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:14:06,617 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:11,557 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:23:12,108 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:12,799 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:23:13,399 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:23:15,675 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:23:16,637 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:17,335 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:18,008 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:23:30,080 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:23:30,641 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:31,013 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:23:31,417 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:23:33,275 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:23:34,317 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:34,978 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:35,647 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:23:49,723 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:23:50,267 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:50,694 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:23:51,050 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:23:53,022 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:23:54,047 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:54,733 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:23:55,431 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:24:07,858 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:24:08,443 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:08,844 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:24:09,222 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:24:11,193 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:24:11,840 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:12,534 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:13,349 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:24:25,452 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:24:26,043 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:26,464 - WDM - INFO - Getting latest mozilla release info for v0.36.0
+2025-05-12 13:24:26,852 - WDM - INFO - About to download new driver from https://github.com/mozilla/geckodriver/releases/download/v0.36.0/geckodriver-v0.36.0-win64.zip
+2025-05-12 13:24:28,790 - WDM - INFO - Driver downloading response is 200
+2025-05-12 13:24:29,435 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:30,118 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:30,800 - WDM - INFO - Driver has been saved in cache [C:\Users\deeps\.wdm\drivers\geckodriver\win64\v0.36.0]
+2025-05-12 13:24:43,706 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:24:44,265 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:50,209 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:24:50,798 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:24:56,902 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:24:57,495 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:29:14,026 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:14,602 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
+2025-05-12 13:29:14,883 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:29:15,331 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:15,651 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "136.0.7103" in cache
+2025-05-12 13:29:15,651 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-12 13:29:23,036 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:23,614 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
+2025-05-12 13:29:23,908 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:29:24,334 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:24,606 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "136.0.7103" in cache
+2025-05-12 13:29:24,606 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-12 13:29:34,189 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:34,760 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
+2025-05-12 13:29:35,033 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:29:35,397 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:35,672 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "136.0.7103" in cache
+2025-05-12 13:29:35,673 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-12 13:29:44,341 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:44,899 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
+2025-05-12 13:29:45,170 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:29:45,534 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:45,828 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "136.0.7103" in cache
+2025-05-12 13:29:45,828 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-12 13:29:54,204 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:54,776 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
+2025-05-12 13:29:55,064 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-12 13:29:55,447 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:29:55,728 - WDM - INFO - There is no [win32] chromedriver "latest" for browser google-chrome "136.0.7103" in cache
+2025-05-12 13:29:55,728 - WDM - INFO - Get LATEST chromedriver version for google-chrome
+2025-05-12 13:30:01,570 - WDM - INFO - ====== WebDriver manager ======
+2025-05-12 13:30:02,137 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
+2025-05-12 13:30:02,430 - WDM - INFO - Get LATEST geckodriver version for None firefox
