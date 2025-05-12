@@ -1,28 +1,35 @@
-# Dark Web Crawler - Security Research Tool
+# Dark Web Crawler - Enhanced Security Research Tool
 
-A secure and ethical dark web crawler developed for cybersecurity research, designed to operate with enhanced security measures and firewall protection enabled.
+A secure and ethical dark web crawler developed for cybersecurity research, designed to operate with robust security measures and comprehensive data extraction capabilities.
 
 ## 🔒 Project Overview
 
-This tool was developed for the Chandigarh Police and Infosys Cybersecurity Hackathon as an **ethical security research tool**. It's designed to assist security researchers and law enforcement in monitoring and analyzing dark web content for legitimate security purposes.
+This advanced dark web crawler was developed for security research and monitoring purposes. It's designed to assist security researchers, analysts, and relevant authorities in safely navigating and extracting data from the dark web for legitimate security and research purposes.
 
 ## ⚠️ Ethical Use Statement
 
 This software is intended **ONLY** for:
 - Legitimate security research
-- Law enforcement investigations
+- Authorized investigations
 - Educational purposes
+- Cybersecurity monitoring
 
 The developers of this tool do not condone or support any illegal activities. Users are responsible for ensuring their use of this tool complies with all applicable laws and regulations.
 
 ## 🔍 Key Features
 
 - **Enhanced Security Operation**: Works with security firewalls enabled
+- **Comprehensive Data Extraction**: Extracts visible and hidden content including:
+  - Headings, paragraphs, tables, and links
+  - Forms and input fields
+  - Hidden elements and expandable content
+  - Images and media references
+- **Dynamic Content Handling**: Scrolls pages and expands collapsed content
 - **Stealth Crawling**: Disables JavaScript, WebRTC, and other potential leak vectors
-- **Hidden Content Detection**: Extracts hidden elements and expandable content
-- **Real-time Data Extraction**: Provides incremental data as it's discovered
 - **Tor Integration**: Safe routing through the Tor network
-- **Comprehensive Data Collection**: Extracts headings, paragraphs, tables, forms, and more
+- **Real-time Data Collection**: Provides incremental data as it's discovered
+- **Robust Error Handling**: Graceful recovery from connection issues
+- **Windows Firewall Compatible**: Creates targeted exceptions without compromising security
 
 ## 🚀 Quick Start (Windows)
 
@@ -35,9 +42,9 @@ The developers of this tool do not condone or support any illegal activities. Us
 ### Installation
 
 ```bash
-# Clone the repository (private access only)
-git clone https://github.com/YOUR_USERNAME/darkweb_crawler.git
-cd darkweb_crawler
+# Clone the repository
+git clone https://github.com/Sahajdeep7988/Darkweb__crawler2.0.git
+cd Darkweb__crawler2.0
 
 # Install requirements
 pip install -r requirements.txt
@@ -56,34 +63,121 @@ Alternatively, use the admin management tool for more options:
 manage.bat
 ```
 
+### Manual Setup and Running
+
+If you prefer to manually set up each component:
+
+1. **Fix Driver Installation**:
+   ```
+   python fix_drivers.py
+   ```
+
+2. **Configure Firewall** (requires admin privileges):
+   ```
+   python setup_firewall.py
+   ```
+
+3. **Start Tor Browser** and keep it running in the background
+
+4. **Run the Crawler**:
+   ```
+   python run_crawler.py
+   ```
+
+## 🎯 Configuring Target Sites
+
+Edit the `configs/sites.json` file to specify which sites to crawl:
+
+```json
+{
+    "sites": [
+        "http://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/",
+        "http://othersiteexample.onion/"
+    ],
+    "max_pages": 20,
+    "depth": 5
+}
+```
+
 ## 🔧 Technical Details
 
-This crawler uses a combination of techniques to safely explore the dark web:
+This crawler uses a combination of techniques for safe and effective dark web exploration:
 
-1. **Firefox/Selenium**: Uses a headless Firefox browser with enhanced security
-2. **Tor Proxy**: Routes all traffic through the Tor network
-3. **Content Extraction**: Employs BeautifulSoup for comprehensive HTML parsing
-4. **Firewall Compatibility**: Creates targeted exceptions without disabling security
-5. **Security Hardening**: Disables high-risk browser features
+1. **Firefox/Selenium Integration**: Uses a headless Firefox browser with enhanced security settings
+2. **BeautifulSoup Integration**: Advanced HTML parsing for comprehensive data extraction
+3. **Tor Proxy Routing**: All traffic securely routed through the Tor network
+4. **Security Hardening**:
+   - Disables JavaScript by default
+   - Blocks WebRTC to prevent IP leaks
+   - Enhanced privacy settings
+   - No cookies or local storage
+5. **Firewall Compatibility**: Creates targeted exceptions without disabling security
+6. **Comprehensive Data Extraction**: Identifies and extracts content from complex page structures
 
 ## 📊 Output Format
 
 Results are saved in JSON format with these files:
 - `incremental_[timestamp].json`: Real-time updates as pages are crawled
 - `results_[timestamp].json`: Complete results after crawling finishes
-- `results_[timestamp]_summary.json`: Statistical overview of findings
 
-## 🛡️ Security Notes
+The output includes:
+- Page title and URL
+- Extracted text content (headings, paragraphs)
+- Links found (both visible and hidden)
+- Form elements
+- Hidden content
+- Metadata and timestamps
 
-- Always keep your firewall enabled for maximum protection
-- The crawler uses targeted exceptions rather than disabling security
-- JavaScript is disabled to prevent malicious code execution
-- For maximum security, use on a dedicated machine or virtual machine
+## 🛡️ Security Notes and Troubleshooting
+
+- **Always keep your firewall enabled** for maximum protection
+- Ensure Tor Browser is running before starting the crawler
+- If you encounter connection issues:
+  1. Check if Tor Browser is running
+  2. Verify that Windows Firewall isn't blocking connections
+  3. Try running the setup script with administrator privileges
+  4. Check the logs in `outputs/logs` directory
+
+## 📦 Project Structure
+
+```
+darkweb_crawler/
+├── configs/               # Configuration files
+│   ├── sites.json         # Target sites
+│   └── tor_settings.json  # Tor configuration
+├── crawler/               # Core crawler modules
+│   ├── core.py            # Main crawler logic
+│   ├── selenium_fetcher.py # Browser automation
+│   └── tor_manager.py     # Tor connectivity
+├── drivers/               # Browser drivers
+├── outputs/               # Results and logs
+│   ├── logs/              # Runtime logs
+│   └── scraped_data/      # JSON output files
+├── SETUP_AND_RUN.bat      # One-click setup and run
+├── manage.bat             # Admin management tool
+├── fix_drivers.py         # Driver installation utility
+├── setup_firewall.py      # Firewall configuration
+└── run_crawler.py         # Main execution script
+```
+
+## 💻 Development and Customization
+
+To extend the crawler's functionality:
+
+1. Add custom extraction logic in `crawler/selenium_fetcher.py`
+2. Modify crawling parameters in `crawler/core.py`
+3. Adjust output formatting in the save methods
 
 ## 📝 License
 
-This project is for authorized use only and is not licensed for public distribution.
+This project is for authorized use only. All rights reserved.
 
 ## 📧 Contact
 
-For authorized use inquiries, contact: [Your Contact Information] 
+For questions, support, or authorized use inquiries:
+
+- **Developer**: Sahajdeep Singh
+- **Email**: sahajdeepsingh404@gmail.com
+- **Phone**: +91 7988168548
+- **GitHub**: [https://github.com/Sahajdeep7988](https://github.com/Sahajdeep7988)
+- **Repository**: [https://github.com/Sahajdeep7988/Darkweb__crawler2.0](https://github.com/Sahajdeep7988/Darkweb__crawler2.0) 
