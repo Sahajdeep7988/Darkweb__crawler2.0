@@ -86,4 +86,4 @@ This project is for authorized use only and is not licensed for public distribut
 
 ## 📧 Contact
 
-For authorized use inquiries, contact: [Contect no:- 7988168548 \nEmail:-sahajdeepsingh404@gmail.com] 
+For authorized use inquiries, contact: [Contect no:- 7988168548   ,   Email:-sahajdeepsingh404@gmail.com] 
