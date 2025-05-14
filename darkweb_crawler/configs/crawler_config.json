@@ -1,0 +1,24 @@
+{
+    "start_urls": [
+        "http://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/",
+        "http://4kmkovyp3z7mfpwdpuxi72zvmlp2svx5u5vi4jfdww7vvxmzuj6cogid.onion/",
+        "http://fakeidagzfgv6aqpsajfjdm2645ohmvyfzw4hsetf5yxztwf43vaubqd.onion/",
+        "http://27ezycbe46rys7i56tm37q24zvbtepuanyj2egnfyv3czglksmhsukyd.onion/"
+    ],
+    "max_pages": 50,
+    "depth": 4,
+    "scan_frequency": 8.0,
+    "rotation_threshold": 15,
+    "use_keywords": true,
+    "use_classification": true,
+    "keywords_file": null,
+    "custom_categories_file": null,
+    "max_retry_attempts": 3,
+    "enabled_categories": [
+        "Drugs",
+        "Weapons",
+        "Fake_IDs",
+        "Hacking",
+        "Human_Trafficking"
+    ]
+}

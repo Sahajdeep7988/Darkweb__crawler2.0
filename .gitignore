@@ -1,0 +1,26 @@
+# Exclude output/results directories
+darkweb_crawler/outputs/scraped_data/
+darkweb_crawler/outputs/alerts/
+darkweb_crawler/outputs/logs/
+
+# Exclude Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Exclude system files
+.DS_Store
+Thumbs.db
+
+# Exclude environment files
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Exclude IDE files
+.idea/
+.vscode/
+*.swp
+*.swo 
