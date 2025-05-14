@@ -33,10 +33,9 @@ echo  [3] Open Admin Shell
 echo  [4] Check Tor Connection
 echo  [5] Fix GeckoDriver (Download Manually)
 echo  [6] Edit Target Sites
-echo  [7] Open Admin Panel
-echo  [8] Exit
+echo  [7] Exit
 echo.
-set /p choice="Enter your choice (1-8): "
+set /p choice="Enter your choice (1-7): "
 
 if "%choice%"=="1" goto SETUP_FIREWALL
 if "%choice%"=="2" goto RUN_CRAWLER
@@ -44,8 +43,7 @@ if "%choice%"=="3" goto ADMIN_SHELL
 if "%choice%"=="4" goto CHECK_TOR
 if "%choice%"=="5" goto FIX_DRIVER
 if "%choice%"=="6" goto EDIT_SITES
-if "%choice%"=="7" goto ADMIN_PANEL
-if "%choice%"=="8" goto EXIT
+if "%choice%"=="7" goto EXIT
 goto MENU
 
 :SETUP_FIREWALL
@@ -121,15 +119,6 @@ if not exist "configs\sites.json" (
 )
 echo Opening sites.json for editing...
 notepad "%CRAWLER_DIR%configs\sites.json"
-goto MENU
-
-:ADMIN_PANEL
-cls
-echo Starting admin panel...
-cd /d "%CRAWLER_DIR%"
-python "%CRAWLER_DIR%admin.py"
-echo.
-pause
 goto MENU
 
 :EXIT

@@ -156,3 +156,4 @@
 2025-05-12 13:30:01,570 - WDM - INFO - ====== WebDriver manager ======
 2025-05-12 13:30:02,137 - WDM - INFO - There is no [win64] geckodriver "latest" for browser firefox "None" in cache
 2025-05-12 13:30:02,430 - WDM - INFO - Get LATEST geckodriver version for None firefox
+2025-05-13 08:09:01,978 - darkweb_alerts - WARNING - ALERT [Fake_IDs] [Severity: 3] URL: http://fakeidagzfgv6aqpsajfjdm2645ohmvyfzw4hsetf5yxztwf43vaubqd.onion/

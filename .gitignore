@@ -2,25 +2,56 @@
 darkweb_crawler/outputs/scraped_data/
 darkweb_crawler/outputs/alerts/
 darkweb_crawler/outputs/logs/
+logs/
+*.log
+outputs/scraped_data/*.json
+geckodriver.log
 
-# Exclude Python cache files
+# Python cache files
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
 # Exclude system files
 .DS_Store
 Thumbs.db
+.directory
 
-# Exclude environment files
+# Environment files
 .env
 .venv
 env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
-# Exclude IDE files
+# IDE files
 .idea/
 .vscode/
 *.swp
-*.swo 
+*.swo
+
+# Tor browser data
+tor-browser*/
+
+# Downloaded drivers
+drivers/
+!drivers/.gitkeep

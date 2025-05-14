@@ -1,89 +1,128 @@
-# Dark Web Crawler - Security Research Tool
+# 🕸️ Dark Web Crawler
 
-A secure and ethical dark web crawler developed for cybersecurity research, designed to operate with enhanced security measures and firewall protection enabled.
+An enhanced dark web crawler designed for security research, with robust features for content analysis, keyword detection, and alerting.
 
-## 🔒 Project Overview
+## 📋 Features
 
-This tool was developed for the Chandigarh Police and Infosys Cybersecurity Hackathon as an **ethical security research tool**. It's designed to assist security researchers and law enforcement in monitoring and analyzing dark web content for legitimate security purposes.
+- **Recursive Onion crawler** with depth & visited tracking
+- **Keyword detection** from CSV files with NLP/fuzzy matching
+- **Category classification** for various illicit content types (Drugs, Weapons, Fake IDs, etc.)
+- **Real-time alert logging** with URL, snippet, timestamp, and category
+- **Tor identity rotation** after configurable number of requests
+- **Admin panel** with CSV import/export and configuration control
+- **Smart use of Selenium + BeautifulSoup** for JS-heavy sites
+- **Login/CAPTCHA detection** with graceful handling
 
-## ⚠️ Ethical Use Statement
-
-This software is intended **ONLY** for:
-- Legitimate security research
-- Law enforcement investigations
-- Educational purposes
-
-The developers of this tool do not condone or support any illegal activities. Users are responsible for ensuring their use of this tool complies with all applicable laws and regulations.
-
-## 🔍 Key Features
-
-- **Enhanced Security Operation**: Works with security firewalls enabled
-- **Stealth Crawling**: Disables JavaScript, WebRTC, and other potential leak vectors
-- **Hidden Content Detection**: Extracts hidden elements and expandable content
-- **Real-time Data Extraction**: Provides incremental data as it's discovered
-- **Tor Integration**: Safe routing through the Tor network
-- **Comprehensive Data Collection**: Extracts headings, paragraphs, tables, forms, and more
-
-## 🚀 Quick Start (Windows)
+## 🚀 Getting Started
 
 ### Prerequisites
 
-1. **Tor Browser**: Must be installed and running during crawling
-2. **Firefox**: Must be installed (separate from Tor Browser)
-3. **Python 3.8+**: With pip for package management
+- **Python 3.8+**
+- **Tor Browser** (running in the background) or Tor service
+- **Firefox** (for Selenium operation)
 
 ### Installation
 
-```bash
-# Clone the repository (private access only)
-git clone https://github.com/YOUR_USERNAME/darkweb_crawler.git
-cd darkweb_crawler
+1. Clone the repository
+2. Install the requirements:
+   ```
+   pip install -r requirements.txt
+   ```
+3. Make sure Tor is running (Start Tor Browser or run Tor service)
+4. Run the crawler:
+   ```
+   python run_crawler.py
+   ```
 
-# Install requirements
-pip install -r requirements.txt
+## ⚙️ Configuration
+
+The crawler uses configuration files in the `configs` directory:
+
+- `crawler_config.json` - Main configuration
+- `sites.json` - Seed URLs (can be imported via admin panel)
+- `keywords.csv` - Keywords for detection
+- `tor_settings.json` - Tor connection settings
+
+## 🛠️ Admin Panel
+
+Use the admin panel to control crawling, import/export data, and toggle categories:
+
+```
+python admin.py --help
 ```
 
-### Running with Enhanced Security
+### Common Operations
 
-The easiest way to run with proper security settings:
+- **Import seed URLs**: `python admin.py --import-seeds urls.csv`
+- **Import keywords**: `python admin.py --import-keywords keywords.csv`
+- **Toggle categories**: `python admin.py --enable-category Weapons` or `--disable-category Weapons`
+- **List categories**: `python admin.py --list-categories`
+- **Set crawl depth**: `python admin.py --set-depth 3`
+- **Set scan frequency**: `python admin.py --set-scan-frequency 5`
+- **Set rotation threshold**: `python admin.py --set-rotation 10`
+- **Export results**: `python admin.py --export-results results.csv`
+- **Export alerts**: `python admin.py --export-alerts alerts.csv`
+- **Start crawling**: `python admin.py --start-crawl`
 
-1. Right-click on `SETUP_AND_RUN.bat` and select "Run as administrator"
-2. Follow the guided setup process
+## 🧩 Core Components
 
-Alternatively, use the admin management tool for more options:
+- **DarkWebCrawler** (`crawler/core.py`) - The main crawler logic
+- **KeywordDetector** (`crawler/keywords.py`) - Handles keyword detection
+- **CategoryClassifier** (`crawler/classifier.py`) - Classifies content into categories
+- **AlertLogger** (`crawler/alerting.py`) - Logs alerts for suspicious content
+- **TorManager** (`crawler/tor_manager.py`) - Manages Tor connectivity
+- **SeleniumFetcher** (`crawler/selenium_fetcher.py`) - Handles browser automation
+
+## 📂 Output Structure
+
+- **Crawled data**: `outputs/scraped_data/results_TIMESTAMP.json`
+- **Incremental data**: `outputs/scraped_data/incremental_TIMESTAMP.json`
+- **Alerts**: `outputs/alerts/alerts_DATE.json`
+- **Logs**: `outputs/logs/crawler_TIMESTAMP.log`
+
+## 🔐 Security Notes
+
+- This tool is for **security research only**
+- Always run behind Tor for anonymity
+- Firewall exceptions may be required for Tor connectivity
+- Use caution when crawling .onion sites
+
+## 📚 Advanced Usage
+
+### Custom Categories
+
+Create a `categories.json` file in the `configs` directory with custom categories:
+
+```json
+{
+  "Custom_Category": {
+    "severity": 3,
+    "indicators": [
+      "\\b(?:keyword1|keyword2|keyword3)\\b",
+      "\\b(?:pattern1|pattern2)\\b"
+    ]
+  }
+}
 ```
-# Run as administrator
-manage.bat
-```
 
-## 🔧 Technical Details
+### Keyword CSV Format
 
-This crawler uses a combination of techniques to safely explore the dark web:
+Keywords CSV files should be in one of these formats:
 
-1. **Firefox/Selenium**: Uses a headless Firefox browser with enhanced security
-2. **Tor Proxy**: Routes all traffic through the Tor network
-3. **Content Extraction**: Employs BeautifulSoup for comprehensive HTML parsing
-4. **Firewall Compatibility**: Creates targeted exceptions without disabling security
-5. **Security Hardening**: Disables high-risk browser features
+1. Simple format:
+   ```
+   keyword,category
+   cocaine,Drugs
+   gun,Weapons
+   ```
 
-## 📊 Output Format
+2. Category columns format:
+   ```
+   Drugs,Weapons,Fake_IDs
+   cocaine,gun,passport
+   heroin,rifle,license
+   ```
 
-Results are saved in JSON format with these files:
-- `incremental_[timestamp].json`: Real-time updates as pages are crawled
-- `results_[timestamp].json`: Complete results after crawling finishes
-- `results_[timestamp]_summary.json`: Statistical overview of findings
+## 🤝 Contributing
 
-## 🛡️ Security Notes
-
-- Always keep your firewall enabled for maximum protection
-- The crawler uses targeted exceptions rather than disabling security
-- JavaScript is disabled to prevent malicious code execution
-- For maximum security, use on a dedicated machine or virtual machine
-
-## 📝 License
-
-This project is for authorized use only and is not licensed for public distribution.
-
-## 📧 Contact
-
-For authorized use inquiries, contact: [Your Contact Information] 
+Contributions are welcome! Please feel free to submit a Pull Request.

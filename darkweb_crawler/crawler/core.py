@@ -8,23 +8,86 @@ from .tor_manager import TorManager
 from .selenium_fetcher import fetch_full_content
 import os
 from datetime import datetime
+from .keywords import KeywordDetector
+from .classifier import CategoryClassifier
+from .alerting import AlertLogger
 
 class DarkWebCrawler:
-    def __init__(self):
+    def __init__(self, config=None):
+        # Load configuration if provided
+        self.config = config or self._load_default_config()
+        
+        # Initialize Tor manager
         self.tor = TorManager()
+        
+        # Set up tracking variables
         self.visited = set()
         self.user_agents = [
             "Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101 Firefox/91.0",
             "TorBrowser/11.0.1",
             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36"
         ]
+        
+        # Create requests session
         self.session = self._create_session()
-        # Create the output directory if it doesn't exist
+        
+        # Set up output directories
         self.output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "outputs", "scraped_data")
         os.makedirs(self.output_dir, exist_ok=True)
+        
+        # Set up timestamp and file paths
         self.timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         self.results_file = os.path.join(self.output_dir, f"results_{self.timestamp}.json")
         self.incremental_file = os.path.join(self.output_dir, f"incremental_{self.timestamp}.json")
+        
+        # Initialize advanced features
+        self._init_advanced_features()
+        
+        # Set up circuit rotation settings
+        self.requests_since_rotation = 0
+        self.rotation_threshold = self.config.get("rotation_threshold", 10)
+        
+    def _load_default_config(self):
+        """Load default configuration"""
+        config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "configs", "crawler_config.json")
+        if os.path.exists(config_path):
+            try:
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except:
+                pass
+        
+        # Default configuration if file not found
+        return {
+            "rotation_threshold": 10,
+            "use_keywords": True,
+            "use_classification": True,
+            "keywords_file": None,
+            "custom_categories_file": None,
+            "max_retry_attempts": 3,
+            "scan_frequency": 5,  # seconds between requests
+            "depth": 2
+        }
+        
+    def _init_advanced_features(self):
+        """Initialize advanced features based on config"""
+        # Set up keyword detection
+        self.keyword_detector = None
+        if self.config.get("use_keywords", True):
+            keywords_file = self.config.get("keywords_file")
+            self.keyword_detector = KeywordDetector(keywords_file)
+        
+        # Set up category classification
+        self.classifier = None
+        if self.config.get("use_classification", True):
+            custom_categories_file = self.config.get("custom_categories_file")
+            self.classifier = CategoryClassifier(
+                custom_categories_file=custom_categories_file,
+                keywords_detector=self.keyword_detector
+            )
+            
+        # Set up alert logging
+        self.alert_logger = AlertLogger()
         
     def _create_session(self):
         """Create a fresh requests session with Tor proxy"""
@@ -60,10 +123,28 @@ class DarkWebCrawler:
         except Exception as e:
             print(f"⚠️ Error saving incremental result: {str(e)}")
     
-    def crawl(self, start_urls, max_pages=10, depth=1):
-        """Crawl dark web sites using Selenium with Tor proxy"""
+    def crawl(self, start_urls=None, max_pages=10, depth=None):
+        """Crawl dark web sites using Selenium with Tor proxy
+        
+        Args:
+            start_urls: List of URLs to start crawling from
+            max_pages: Maximum number of pages to crawl
+            depth: Maximum depth to crawl (overrides config)
+            
+        Returns:
+            list: Results from crawling
+        """
+        # Use provided URLs or try to load from config
         if not start_urls:
+            start_urls = self.config.get("start_urls", [])
+            
+        if not start_urls:
+            print("❌ No start URLs provided and none found in config")
             return []
+        
+        # Use provided depth or value from config
+        if depth is None:
+            depth = self.config.get("depth", 1)
         
         results = []
         visited = set()
@@ -86,8 +167,18 @@ class DarkWebCrawler:
             page_data = fetch_full_content(url)
             pages_crawled += 1
             
+            # Check if circuit rotation is needed
+            self.requests_since_rotation += 1
+            if self.requests_since_rotation >= self.rotation_threshold:
+                self._rotate_identity()
+            
             if "error" in page_data:
                 print(f"🚫 Error retrieving {url}: {page_data['error']}")
+                
+                # Handle login/CAPTCHA detection
+                if self._is_login_or_captcha_error(page_data["error"]):
+                    print("⚠️ Login or CAPTCHA detected - marking URL for possible manual review")
+                    page_data["requires_login"] = True
             else:
                 print(f"✅ {pages_crawled}/{max_pages} - {url}")
                 
@@ -118,6 +209,7 @@ class DarkWebCrawler:
                     for elem in soup.find_all(class_=lambda c: c and ("hidden" in c or "collapsed" in c)):
                         hidden_elements.append(elem.text)
                     
+                    # Add extracted content to page data
                     page_data["headings"] = headings
                     page_data["paragraphs"] = paragraphs
                     page_data["tables"] = tables
@@ -125,6 +217,43 @@ class DarkWebCrawler:
                     page_data["images"] = images
                     page_data["hidden_content"] = hidden_elements
                     page_data["timestamp"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    
+                    # Combine all text for analysis
+                    all_text = "\n".join([
+                        " ".join(headings),
+                        " ".join(paragraphs),
+                        " ".join(tables),
+                        " ".join(forms),
+                        " ".join(hidden_elements)
+                    ])
+                    
+                    # Run content analysis with classifier
+                    if self.classifier:
+                        classification = self.classifier.classify_content(
+                            all_text, 
+                            url=url, 
+                            html=page_data["html"]
+                        )
+                        page_data["classification"] = classification
+                        
+                        # Create alerts for suspicious content
+                        if classification:
+                            for category, category_data in classification.items():
+                                severity = category_data.get("severity", 1)
+                                confidence = category_data.get("confidence", 0)
+                                
+                                # Only alert if confidence is high enough
+                                if confidence >= 70:
+                                    # Get a snippet of the matching content
+                                    matches = category_data.get("matches", [])
+                                    snippet = matches[0].get("context", "") if matches else ""
+                                    
+                                    self.alert_logger.log_alert(
+                                        url=url,
+                                        category=category,
+                                        severity=severity,
+                                        snippet=snippet
+                                    )
                     
                     # Save incremental result
                     self._save_incremental_result(page_data)
@@ -136,21 +265,30 @@ class DarkWebCrawler:
                     results.append(page_data)
             
             # Sleep briefly to avoid overloading Tor circuits
-            time.sleep(2)
-            
-            # Rotate Tor circuit if configured (requires stem)
-            try:
-                from stem import Signal
-                from stem.control import Controller
-                
-                with Controller.from_port(port=9051) as controller:
-                    controller.authenticate()
-                    controller.signal(Signal.NEWNYM)
-                    print("🔄 Rotated Tor circuit for fresh connection")
-            except Exception as e:
-                print(f"⚠️ Circuit rotation failed: {str(e)}")
+            scan_frequency = self.config.get("scan_frequency", 2)
+            time.sleep(scan_frequency)
         
         return results
+    
+    def _rotate_identity(self):
+        """Rotate Tor identity after N requests"""
+        print(f"🔄 Rotating Tor identity after {self.requests_since_rotation} requests...")
+        
+        # Use Tor Manager to rotate circuit
+        if self.tor.rotate_circuit():
+            print("✅ Tor identity rotated successfully")
+            # Reset the counter
+            self.requests_since_rotation = 0
+            # Create a fresh session with new headers
+            self.session = self._create_session()
+        else:
+            print("⚠️ Failed to rotate Tor identity, continuing with current identity")
+    
+    def _is_login_or_captcha_error(self, error_message):
+        """Check if error suggests login or CAPTCHA"""
+        login_indicators = ["login", "sign in", "captcha", "robot", "human", "verification"]
+        error_lower = error_message.lower()
+        return any(indicator in error_lower for indicator in login_indicators)
         
     def save_results(self, results, output_file=None):
         """Save crawl results to a JSON file"""
@@ -170,6 +308,10 @@ class DarkWebCrawler:
             "successful_pages": len([page for page in results if "error" not in page]),
             "error_pages": len([page for page in results if "error" in page])
         }
+        
+        # Add alert statistics
+        if hasattr(self, "alert_logger"):
+            stats["alerts"] = self.alert_logger.get_alert_stats()
         
         summary_file = output_file.replace(".json", "_summary.json")
         with open(summary_file, "w", encoding="utf-8") as f:
@@ -248,87 +390,131 @@ class DarkWebCrawler:
                 field_data = {
                     'type': field.name,
                     'name': field.get('name', ''),
-                    'id': field.get('id', ''),
                 }
                 if field.name == 'input':
-                    field_data['input_type'] = field.get('type', 'text')
-                fields.append(field_data)
-            
-            forms.append({
-                'action': form.get('action', ''),
-                'method': form.get('method', 'get'),
-                'fields': fields
-            })
+                    field_data['input_type'] = field.get('type', '')
+                forms.append({
+                    'action': form.get('action', ''),
+                    'method': form.get('method', 'get'),
+                    'fields': fields
+                })
         return forms
     
     def _extract_images(self, base_url, soup):
-        """Extract all images"""
+        """Extract all images with src attributes"""
         images = []
-        for img in soup.find_all('img'):
+        for img in soup.find_all('img', src=True):
             src = img.get('src', '')
             if src:
+                # Convert to absolute URL if needed
+                if not src.startswith(('http://', 'https://')):
+                    src = urljoin(base_url, src)
                 images.append({
-                    'src': urljoin(base_url, src),
+                    'src': src,
                     'alt': img.get('alt', ''),
+                    'width': img.get('width', ''),
+                    'height': img.get('height', '')
                 })
         return images
     
     def _extract_links(self, base_url, soup):
-        """Extract all links with text"""
+        """Extract all links from a page"""
         links = []
-        for link in soup.find_all('a', href=True):
-            href = link.get('href', '')
-            if href:
+        for a in soup.find_all('a', href=True):
+            href = a.get('href', '')
+            if href and not href.startswith('#'):
+                # Convert to absolute URL if needed
+                if not href.startswith(('http://', 'https://')):
+                    href = urljoin(base_url, href)
                 links.append({
-                    'url': urljoin(base_url, href),
-                    'text': link.get_text(strip=True)
+                    'url': href,
+                    'text': a.get_text(strip=True),
+                    'is_onion': '.onion' in href
                 })
         return links
     
     def _extract_hidden_elements(self, soup):
-        """Extract content from hidden elements"""
-        hidden_elements = []
+        """Extract potentially hidden elements"""
+        hidden = []
         
         # Find elements with display:none or visibility:hidden
         for elem in soup.find_all(style=True):
             style = elem.get('style', '').lower()
             if 'display:none' in style or 'visibility:hidden' in style:
-                hidden_elements.append({
-                    'tag': elem.name,
-                    'content': elem.get_text(strip=True),
+                hidden.append({
+                    'type': elem.name,
+                    'text': elem.get_text(strip=True),
                     'html': str(elem)
                 })
         
-        # Find elements with hidden class
-        for elem in soup.find_all(class_=True):
-            classes = elem.get('class', [])
-            if 'hidden' in classes or 'hide' in classes:
-                hidden_elements.append({
-                    'tag': elem.name,
-                    'content': elem.get_text(strip=True),
+        # Find elements with hidden classes
+        hidden_classes = ['hidden', 'hide', 'invisible', 'collapsed']
+        for css_class in hidden_classes:
+            for elem in soup.find_all(class_=lambda c: c and css_class in c.split()):
+                hidden.append({
+                    'type': elem.name,
+                    'text': elem.get_text(strip=True),
                     'html': str(elem)
                 })
                 
-        return hidden_elements
-
+        return hidden
+    
     def _find_all_links(self, base_url, soup):
-        """Find all links on page, including .onion and regular URLs"""
-        new_links = set()
-        for link in soup.find_all('a', href=True):
-            try:
-                href = link['href'].strip()
-                if not href or href.startswith('#') or href.startswith('javascript:'):
-                    continue
-                    
-                full_url = urljoin(base_url, href)
-                parsed = urlparse(full_url)
+        """Find all links in various formats"""
+        links = set()
+        
+        # Standard links
+        for a in soup.find_all('a', href=True):
+            href = a.get('href', '')
+            if href and not href.startswith('#'):
+                # Convert to absolute URL if needed
+                if not href.startswith(('http://', 'https://')):
+                    href = urljoin(base_url, href)
+                links.add(href)
                 
-                # Only add .onion domains or internal pages from the current domain
-                if parsed.netloc.endswith('.onion'):
-                    new_links.add(full_url)
-                elif not parsed.netloc and parsed.path:
-                    # Internal link on the same domain
-                    new_links.add(full_url)
-            except:
-                continue
-        return list(new_links) 
+        # Find URLs in text (look for onion domains)
+        text = soup.get_text()
+        import re
+        onion_pattern = r'https?://[a-zA-Z0-9]{16,56}\.onion\b'
+        for match in re.finditer(onion_pattern, text):
+            links.add(match.group(0))
+            
+        return list(links)
+    
+    def import_keywords_from_csv(self, csv_file):
+        """Import keywords from CSV file"""
+        if self.keyword_detector:
+            success = self.keyword_detector.load_keywords(csv_file)
+            return success
+        return False
+    
+    def toggle_category(self, category, enabled=True):
+        """Enable or disable a category for classification"""
+        if not self.classifier:
+            return False
+            
+        if enabled:
+            return self.classifier.enable_category(category)
+        else:
+            return self.classifier.disable_category(category)
+    
+    def get_categories(self):
+        """Get list of available categories with enabled status"""
+        if self.classifier:
+            return self.classifier.get_category_list()
+        return {}
+    
+    def set_scan_frequency(self, seconds):
+        """Set time delay between requests"""
+        if isinstance(seconds, (int, float)) and seconds > 0:
+            self.config["scan_frequency"] = seconds
+            return True
+        return False
+    
+    def set_rotation_threshold(self, requests):
+        """Set number of requests before rotating Tor identity"""
+        if isinstance(requests, int) and requests > 0:
+            self.config["rotation_threshold"] = requests
+            self.rotation_threshold = requests
+            return True
+        return False 
